@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:intl/intl.dart'; 
+import 'package:shared_preferences/shared_preferences.dart';// Import the intl package
 
 void main() {
   runApp(MyApp());
@@ -398,8 +399,23 @@ class PlayerCard extends StatefulWidget {
   _PlayerCardState createState() => _PlayerCardState();
 }
 
+
 class _PlayerCardState extends State<PlayerCard> {
-  List<bool> attendance = List.generate(7, (index) => false); // List to track attendance for each day
+  late SharedPreferences _prefs;
+  late List<bool> attendance;
+  final String _attendanceKey = 'attendance_${DateTime.now().toString()}';
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeAttendance();
+  }
+
+  void _initializeAttendance() async {
+    _prefs = await SharedPreferences.getInstance();
+    attendance = _prefs.getBoolList(_attendanceKey) ?? List.filled(5, false);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -428,13 +444,18 @@ class _PlayerCardState extends State<PlayerCard> {
             SizedBox(width: 10), // Add spacing between checkboxes and icon
             IconButton(
               icon: Icon(Icons.save), // Change icon to save icon
-              onPressed: () {
-                // Handle save button press
-              },
+              onPressed: _saveAttendance,
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void _saveAttendance() {
+    _prefs.setBoolList(_attendanceKey, attendance);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Attendance saved successfully')),
     );
   }
 

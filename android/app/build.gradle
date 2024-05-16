@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.oda_attendace_tracker"
-    compileSdkVersion 34 // Update to the required compile SDK version
+    compileSdkVersion 34 // Updated compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -42,8 +42,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.oda_attendace_tracker"
-        minSdkVersion 20 // Update to the required minimum SDK version
-        targetSdkVersion 34 // Ensure target SDK version matches compile SDK version
+        minSdkVersion 20 // Updated minSdkVersion
+        targetSdkVersion 34 // Ensure targetSdkVersion matches compileSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
