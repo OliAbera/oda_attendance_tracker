@@ -2,17 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/loginScreenT.dart';
 import 'package:oda_attendace_tracker/student.dart';
 
-
 class RegScreenS extends StatefulWidget {
   const RegScreenS({Key? key}) : super(key: key);
 
   @override
-  _RegScreenState createState() => _RegScreenState();
+  _RegScreenSState createState() => _RegScreenSState();
 }
 
-class _RegScreenState extends State<RegScreenS> {
-  bool passwordVisible = true;
-  bool confirmPasswordVisible = true;
+class _RegScreenSState extends State<RegScreenS> {
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  String? _selectedSex;
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill the email field with a frequently used email, if desired
+    _emailController.text = "frequent.email@example.com"; // Replace with actual email
+  }
+
+  // Function to check if all required fields are filled
+  bool _areAllFieldsFilled() {
+    return _nameController.text.isNotEmpty &&
+        _emailController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty &&
+        _confirmPasswordController.text.isNotEmpty &&
+        _selectedSex != null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +44,8 @@ class _RegScreenState extends State<RegScreenS> {
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 40, 5, 66),
-                Color.fromARGB(255, 15, 58, 175),
+                 Color.fromARGB(255, 27, 2, 85),
+                Color.fromARGB(244, 124, 3, 104),
               ]),
             ),
             child: const Padding(
@@ -48,19 +68,24 @@ class _RegScreenState extends State<RegScreenS> {
                     topRight: Radius.circular(40)),
                 color: Colors.white,
               ),
-              height: double.infinity,
-              width: double.infinity,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 18.0, right: 18),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 18.0, right: 18),
+                child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextField(
+                        controller: _nameController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.check,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              // Auto-fill functionality for full name if needed
+                              _nameController.text = "John Doe"; // Replace with actual name
+                            },
                           ),
                           label: Text(
                             'Full Name',
@@ -72,10 +97,17 @@ class _RegScreenState extends State<RegScreenS> {
                         ),
                       ),
                       TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.check,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              // Auto-fill functionality for email
+                              _emailController.text = "frequent.email@example.com";
+                            },
                           ),
                           label: Text(
                             'Phone or Gmail',
@@ -87,16 +119,17 @@ class _RegScreenState extends State<RegScreenS> {
                         ),
                       ),
                       TextField(
-                        obscureText: passwordVisible,
+                        controller: _passwordController,
+                        obscureText: !_passwordVisible,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              passwordVisible ? Icons.visibility_off : Icons.visibility,
+                              _passwordVisible ? Icons.visibility : Icons.visibility_off,
                               color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
-                                passwordVisible = !passwordVisible;
+                                _passwordVisible = !_passwordVisible;
                               });
                             },
                           ),
@@ -105,21 +138,22 @@ class _RegScreenState extends State<RegScreenS> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 73, 1, 61),
-                              ),
+                            ),
                           ),
                         ),
                       ),
                       TextField(
-                        obscureText: confirmPasswordVisible,
+                        controller: _confirmPasswordController,
+                        obscureText: !_confirmPasswordVisible,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              confirmPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                              _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
                               color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
-                                confirmPasswordVisible = !confirmPasswordVisible;
+                                _confirmPasswordVisible = !_confirmPasswordVisible;
                               });
                             },
                           ),
@@ -132,15 +166,56 @@ class _RegScreenState extends State<RegScreenS> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
-                      SizedBox(height: 70),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text(
+                            'Sex:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 171, 23, 184),
+                            ),
+                          ),
+                          Radio<String>(
+                            value: 'Male',
+                            groupValue: _selectedSex,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSex = value;
+                              });
+                            },
+                          ),
+                          Text('Male'),
+                          Radio<String>(
+                            value: 'Female',
+                            groupValue: _selectedSex,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedSex = value;
+                              });
+                            },
+                          ),
+                          Text('Female'),
+                        ],
+                      ),
+                      const SizedBox(height: 70),
                       GestureDetector(
                         onTap: () {
-                          // Navigate to Adminpage.dart when the button is pressed
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          if (_areAllFieldsFilled()) {
+                            // Navigate to Adminpage.dart when the button is pressed
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomePage()),
+                            );
+                          } else {
+                            // Show snack bar message if any required field is empty
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Fill all the questions'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          }
                         },
                         child: Container(
                           height: 55,
@@ -148,10 +223,10 @@ class _RegScreenState extends State<RegScreenS> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             gradient: const LinearGradient(
-                                colors: [
-                                   Color.fromARGB(255, 27, 2, 85),
-                Color.fromARGB(244, 124, 3, 104),
-                                ]
+                              colors: [
+                                Color.fromARGB(255, 27, 2, 85),
+                                Color.fromARGB(244, 124, 3, 104),
+                              ],
                             ),
                           ),
                           child: const Center(
@@ -160,24 +235,24 @@ class _RegScreenState extends State<RegScreenS> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: Colors.white
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 80),
+                      const SizedBox(height: 80),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
+                            const Text(
                               "Already have an account?",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey
+                                color: Colors.grey,
                               ),
                             ),
                             GestureDetector(
@@ -185,19 +260,19 @@ class _RegScreenState extends State<RegScreenS> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>loginScreenT(),
+                                    builder: (context) => LoginScreenT(),
                                   ),
                                 );
                               },
-                              child: Text(
+                              child: const Text(
                                 "Sign in",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
-                                  color: Colors.black
+                                  color: Colors.black,
                                 ),
                               ),
-                              ),
+                            ),
                           ],
                         ),
                       )

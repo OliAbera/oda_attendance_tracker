@@ -2,17 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/Teacher_option.dart';
 import 'package:oda_attendace_tracker/loginScreenT.dart';
 
-
 class RegScreenT extends StatefulWidget {
   const RegScreenT({Key? key}) : super(key: key);
 
   @override
-  _RegScreenState createState() => _RegScreenState();
+  _RegScreenTState createState() => _RegScreenTState();
 }
 
-class _RegScreenState extends State<RegScreenT> {
-  bool passwordVisible = true;
-  bool confirmPasswordVisible = true;
+class _RegScreenTState extends State<RegScreenT> {
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controllers with empty strings if needed
+    _nameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +37,8 @@ class _RegScreenState extends State<RegScreenT> {
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 40, 5, 66),
-                Color.fromARGB(255, 15, 58, 175),
+                 Color.fromARGB(255, 27, 2, 85),
+                Color.fromARGB(244, 124, 3, 104),
               ]),
             ),
             child: const Padding(
@@ -33,9 +46,10 @@ class _RegScreenState extends State<RegScreenT> {
               child: Text(
                 'Create Your\nAccount',
                 style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -57,10 +71,17 @@ class _RegScreenState extends State<RegScreenT> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextField(
+                        controller: _nameController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.check,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              // Auto-fill functionality for full name if needed
+                              _nameController.text = "John Doe"; // Replace with actual name
+                            },
                           ),
                           label: Text(
                             'Full Name',
@@ -72,10 +93,17 @@ class _RegScreenState extends State<RegScreenT> {
                         ),
                       ),
                       TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.check,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {
+                              // Auto-fill functionality for email
+                              _emailController.text = "frequent.email@example.com"; // Replace with actual email
+                            },
                           ),
                           label: Text(
                             'Phone or Gmail',
@@ -87,16 +115,17 @@ class _RegScreenState extends State<RegScreenT> {
                         ),
                       ),
                       TextField(
-                        obscureText: passwordVisible,
+                        controller: _passwordController,
+                        obscureText: !_passwordVisible,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              passwordVisible ? Icons.visibility_off : Icons.visibility,
+                              _passwordVisible ? Icons.visibility : Icons.visibility_off,
                               color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
-                                passwordVisible = !passwordVisible;
+                                _passwordVisible = !_passwordVisible;
                               });
                             },
                           ),
@@ -105,21 +134,22 @@ class _RegScreenState extends State<RegScreenT> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 73, 1, 61),
-                              ),
+                            ),
                           ),
                         ),
                       ),
                       TextField(
-                        obscureText: confirmPasswordVisible,
+                        controller: _confirmPasswordController,
+                        obscureText: !_confirmPasswordVisible,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              confirmPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                              _confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
                               color: Colors.grey,
                             ),
                             onPressed: () {
                               setState(() {
-                                confirmPasswordVisible = !confirmPasswordVisible;
+                                _confirmPasswordVisible = !_confirmPasswordVisible;
                               });
                             },
                           ),
@@ -136,7 +166,7 @@ class _RegScreenState extends State<RegScreenT> {
                       SizedBox(height: 70),
                       GestureDetector(
                         onTap: () {
-                          // Navigate to Adminpage.dart when the button is pressed
+                          // Navigate to TeacherOptionsPage when the button is pressed
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => TeacherOptionsPage()),
@@ -148,10 +178,10 @@ class _RegScreenState extends State<RegScreenT> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             gradient: const LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 27, 2, 85),
-                Color.fromARGB(244, 124, 3, 104),
-                                ]
+                              colors: [
+                                Color.fromARGB(255, 27, 2, 85),
+                                Color.fromARGB(244, 124, 3, 104),
+                              ],
                             ),
                           ),
                           child: const Center(
@@ -160,7 +190,7 @@ class _RegScreenState extends State<RegScreenT> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: Colors.white
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -177,7 +207,7 @@ class _RegScreenState extends State<RegScreenT> {
                               "Already have an account?",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey
+                                color: Colors.grey,
                               ),
                             ),
                             GestureDetector(
@@ -185,7 +215,7 @@ class _RegScreenState extends State<RegScreenT> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>loginScreenT(),
+                                    builder: (context) => LoginScreenT(),
                                   ),
                                 );
                               },
@@ -194,10 +224,10 @@ class _RegScreenState extends State<RegScreenT> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17,
-                                  color: Colors.black
+                                  color: Colors.black,
                                 ),
                               ),
-                              ),
+                            ),
                           ],
                         ),
                       )

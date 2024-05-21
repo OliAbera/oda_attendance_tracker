@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 
 void main() {
   runApp(MyApp());
@@ -71,7 +72,17 @@ class _TeacherRoleBState extends State<TeacherRoleB>
     if (selectedWeek < numberOfWeeks) {
       setState(() {
         selectedWeek++;
+        // Trigger a full page refresh
+        _selectWeek(selectedWeek);
       });
+    }
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
 
@@ -79,15 +90,19 @@ class _TeacherRoleBState extends State<TeacherRoleB>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            // Handle menu button press
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer(); // Open navigation drawer
+              },
+            );
           },
         ),
         title: Row(
           children: [
-            Text('11-D'),
+            Text('11-B'),
             SizedBox(width: 20), // Add spacing between text and date/week/month/year teller
             // Display the selected week dynamically
             Text('Week $selectedWeek'),
@@ -97,7 +112,7 @@ class _TeacherRoleBState extends State<TeacherRoleB>
           IconButton(
             icon: Icon(Icons.notifications),
             onPressed: () {
-              // Navigate to TeacherRole2.dart when notification icon is pressed
+              _launchURL('https://t.me/ODA_attendance/10'); // Launch URL when notification icon is pressed
             },
           ),
           IconButton(
@@ -121,14 +136,17 @@ class _TeacherRoleBState extends State<TeacherRoleB>
                 return Transform.translate(
                   offset: Offset(
                       rotateRight ? -_animation.value : _animation.value, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(
-                      numberOfWeeks,
-                      (index) => WeekButton(
-                        weekNumber: index + 1,
-                        isSelected: selectedWeek == index + 1,
-                        onPressed: () => _selectWeek(index + 1),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        numberOfWeeks,
+                        (index) => WeekButton(
+                          weekNumber: index + 1,
+                          isSelected: selectedWeek == index + 1,
+                          onPressed: () => _selectWeek(index + 1),
+                        ),
                       ),
                     ),
                   ),
@@ -140,8 +158,7 @@ class _TeacherRoleBState extends State<TeacherRoleB>
           Expanded(
             child: ListView(
               children: [
-                // List of PlayerCard widgets for each student
-                PlayerCard(
+                 PlayerCard(
                   name: 'Abdi Abera Jote',
                   photoAsset: 'lib/images/Abdisa1.jpg',
                   rollNumber: 1,
@@ -341,11 +358,6 @@ class _TeacherRoleBState extends State<TeacherRoleB>
                   photoAsset: 'assets/images/sifo.jpg',
                   rollNumber: 40,
                 ),
-                PlayerCard(
-                  name: 'Wangari Kasu Mihratu',
-                  photoAsset: 'assets/images/torres.jpg',
-                  rollNumber: 41,
-                ),
               ],
             ),
           ),
@@ -355,6 +367,76 @@ class _TeacherRoleBState extends State<TeacherRoleB>
         onPressed: _navigateToNextWeek,
         child: Icon(Icons.arrow_forward),
       ),
+      drawer: Drawer(
+  child: ListView(
+    padding: EdgeInsets.zero,
+    children: <Widget>[
+      DrawerHeader(
+        decoration: BoxDecoration(
+          color: Colors.purple,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              // Display user's picture (optional)
+              backgroundColor: Colors.white,
+              radius: 30,
+              child: Icon(
+                Icons.person,
+                size: 40,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'User Name', // Display user's name
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'user@example.com', // Display user's email
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+      ),
+      ListTile(
+        leading: Icon(Icons.home),
+        title: Text('Home'),
+        onTap: () {
+          // Navigate to home screen
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.help),
+        title: Text('Help Center'),
+        onTap: () {
+          // Navigate to help center screen
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.question_answer),
+        title: Text('FAQ'),
+        onTap: () {
+          // Navigate to FAQ screen
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.exit_to_app),
+        title: Text('Exit'),
+        onTap: () {
+          // Handle exit action
+        },
+      ),
+    ],
+  ),
+)
+
     );
   }
 }
@@ -369,26 +451,43 @@ class WeekButton extends StatelessWidget {
     required this.isSelected,
     required this.onPressed,
   });
+
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: isSelected
-            ? MaterialStateProperty.all<Color>(Colors.blue)
-            : MaterialStateProperty.all<Color>(Colors.grey),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        margin: EdgeInsets.symmetric(horizontal: 4),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.purple : Colors.grey,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          'Week $weekNumber',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
-      child: Text('Week $weekNumber'),
     );
   }
 }
 
 class PlayerCard extends StatefulWidget {
-  final String name;
+  String name;
   final String photoAsset;
-  final int rollNumber;
+  int rollNumber;
+  Map<int, bool> _attendance = {
+    0: false,
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+  }; // Map to store attendance state for each day
 
-  const PlayerCard({
+  PlayerCard({
     required this.name,
     required this.photoAsset,
     required this.rollNumber,
@@ -399,46 +498,70 @@ class PlayerCard extends StatefulWidget {
 }
 
 class _PlayerCardState extends State<PlayerCard> {
-  List<bool> attendance = List.generate(7, (index) => false); // List to track attendance for each day
+  late String _editedName;
+  late int _editedRollNumber;
+  List<String> _dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+  @override
+  void initState() {
+    super.initState();
+    _editedName = widget.name;
+    _editedRollNumber = widget.rollNumber;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        onTap: () {
-          _showStudentDetailsDialog(context);
-        },
-        leading: CircleAvatar(
-          backgroundImage: AssetImage(widget.photoAsset),
-        ),
-        title: Text(widget.name),
-        subtitle: Text('Roll Number: ${widget.rollNumber}'),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (int i = 0; i < 5; i++)
-              Checkbox(
-                value: attendance[i],
-                onChanged: (value) {
-                  setState(() {
-                    attendance[i] = value!;
-                  });
-                },
+    return GestureDetector(
+      onTap: () => _showStudentDetails(context),
+      onLongPress: () => _showEditDialog(),
+      child: Card(
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: AssetImage(widget.photoAsset),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(widget.name),
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () => _showEditDialog(),
               ),
-            SizedBox(width: 10), // Add spacing between checkboxes and icon
-            IconButton(
-              icon: Icon(Icons.save), // Change icon to save icon
-              onPressed: () {
-                // Handle save button press
-              },
-            ),
-          ],
+            ],
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Roll Number: ${widget.rollNumber}'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(widget._attendance.length, (index) {
+                  return Column(
+                    children: [
+                      Text(_dayLabels[index]), // Day label
+                      Checkbox(
+                        value: widget._attendance[index] ?? false,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            widget._attendance[index] = value ?? false;
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                }),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _showStudentDetailsDialog(BuildContext context) {
+  void _showStudentDetails(BuildContext context) {
+    int attendedDays = widget._attendance.values.where((day) => day).length;
+    double attendancePercentage = attendedDays / widget._attendance.length;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -452,11 +575,11 @@ class _PlayerCardState extends State<PlayerCard> {
               // Add more details here like age, sex, phone, email, class, section, etc.
               SizedBox(height: 10),
               Text('Attendance Details:'),
-              Text('Attended Days: '), // Add actual number of attended days
-              Text('Missed Days: '), // Add actual number of missed days
+              Text('Attended Days: $attendedDays out of ${widget._attendance.length}'),
+              Text('Attendance Progress: ${(attendancePercentage * 100).toStringAsFixed(2)}%'),
               SizedBox(height: 10),
               LinearProgressIndicator(
-                value: 0.7, // Example value, replace with actual progress
+                value: attendancePercentage, // Show attendance progress
               ),
             ],
           ),
@@ -466,6 +589,58 @@ class _PlayerCardState extends State<PlayerCard> {
                 Navigator.of(context).pop();
               },
               child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showEditDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Student Information'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Name'),
+                onChanged: (value) {
+                  _editedName = value;
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Roll Number'),
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  _editedRollNumber = int.tryParse(value) ?? 0;
+                },
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Update the student information here
+                setState(() {
+                  if (_editedName.isNotEmpty) {
+                    widget.name = _editedName;
+                  }
+                  if (_editedRollNumber != 0) {
+                    widget.rollNumber = _editedRollNumber;
+                  }
+                });
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
             ),
           ],
         );

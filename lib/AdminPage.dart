@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oda_attendace_tracker/Add_teacher.dart';
 import 'package:oda_attendace_tracker/VSTBottompage.dart';
 void main() {
   runApp(MyApp());
@@ -52,7 +53,7 @@ class AdminScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddTeacherPage()),
+                      MaterialPageRoute(builder: (context) => AddTeacher1Page()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

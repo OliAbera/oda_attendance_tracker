@@ -1,0 +1,534 @@
+if (index == 0) {
+        // Add Abdisa Lema Ideo's PlayerCard
+        return PlayerCard(
+          name: 'Abdisa Lema Ideo',
+          photoAsset: 'lib/images/Abdisa.jpg',
+          rollNumber: 1,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      } else if (index == 1) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Abdulwehab Nur Bushura',
+          photoAsset: 'lib/images/John.jpg',
+          rollNumber: 2,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 2) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Abduraman Mohammed Garibe',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 3,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 3) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ararsa Fesal Abdulkarim',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 4,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 4) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Asiya Ahmed Ibrahim',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 5,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 5) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ayantu Abdela Mohammed',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 6,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 6) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ayiti Awel Osman',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 7,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 7) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Betelhem Zewude Lema',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 8,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 8) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Billadin Rida A/Fita',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 9,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 9) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Chalchisa Girma Workina',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 10,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 10) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ebisa Mokonnen Dibaba',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 11,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 11) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ebise Imana Seboka ',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 12,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 12) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Eebbisa Fikadu Lemi ',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 13,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 13) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Elsayi Birhanu Tesso',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 14,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 14) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Faya Tafari Jaleta',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 15,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 15) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Feben Nagash Debelu ',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 16,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 16) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Fenet Zarihun Oljira',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 17,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 17) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Fininsa Adem Wado',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 18,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 18) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Firaol Diriba Bamo',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 19,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 19) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Firaol Teshome Asafa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 20,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 20) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Gelgelo Dugo Hoxesa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 21,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 21) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Gemechu Fituma Dereje',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 22,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 22) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Guta Merga Bayisa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 23,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 23) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Hana Sintayo Birhanu',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 24,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 24) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Hundaol Abera Kabeta',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 25,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 25) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Husniya M/Dsani A/Simal',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 26,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 26) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Kekeba Hachalu Bekele',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 27,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 27) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Koket Mabratu Melka',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 28,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 28) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Mahammud Jemal Buli',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 29,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 29) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Muaz Zakir Tamam',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 30,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 30) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Naboni Abrham Humna',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 31,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 31) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Nagawo Bariso Sage',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 32,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 32) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Naod Getu Zawde',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 33,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 33) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Nura Muzamil Shifa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 34,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 34) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Obse Tafari Tsagaye',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 35,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 35) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Oluma Abera Seifu',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 36,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 36) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Ramadan Ganamo Ararso ',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 37,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 37) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Robsan Feleke Kasa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 38,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 38) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Sagni Tafesa Abalti',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 39,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 39) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Sifan Girma Tafari',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 40,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }else if (index == 40) {
+        // Add John Doe's PlayerCard
+        return PlayerCard(
+          name: 'Yosef Alemayo Ibsa',
+          photoAsset: 'lib/images/Abdure.jpg',
+          rollNumber: 41,
+          attendance: _attendanceList[index],
+          onAttendanceChanged: (List<bool> newAttendance) {
+            setState(() {
+              _attendanceList[index] = newAttendance;
+            });
+          },
+        );
+      }

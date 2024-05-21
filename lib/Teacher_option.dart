@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/GeneratePinCode.dart';
-import 'package:oda_attendace_tracker/OTP.dart';
 import 'package:oda_attendace_tracker/barcode.dart';
-import 'package:oda_attendace_tracker/options2.dart';// Import Option2.dart
+import 'package:oda_attendace_tracker/optionchart.dart';
+
+import 'package:oda_attendace_tracker/options2.dart';
+import 'package:oda_attendace_tracker/piechart.dart'; // Import Option2.dart
 
 void main() {
   runApp(MaterialApp(
@@ -39,7 +41,7 @@ class _TeacherOptionsPageState extends State<TeacherOptionsPage> {
       // Navigate to OTPScreen when "Give a Session" is selected
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => OTPScreen()),
+        MaterialPageRoute(builder: (context) => PieChartPage()),
       );
     }
   }
@@ -49,21 +51,24 @@ class _TeacherOptionsPageState extends State<TeacherOptionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Teacher Options'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 27, 2, 85),
+                Color.fromARGB(244, 124, 3, 104),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
         automaticallyImplyLeading: _selectedIndex != 0,
       ),
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 27, 2, 85),
-                  Color.fromARGB(244, 124, 3, 104),
-                ],
-              ),
-            ),
+            color: Colors.white, // Set scaffold background color to white
           ),
           Center(
             child: _widgetOptions.elementAt(_selectedIndex),
@@ -81,8 +86,8 @@ class _TeacherOptionsPageState extends State<TeacherOptionsPage> {
             label: 'Generate QR Code',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.class_),
-            label: 'Give a Session',
+            icon: Icon(Icons.pie_chart),
+            label: 'Generate chart',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -137,25 +142,27 @@ class GenerateQRPage extends StatelessWidget {
   }
 }
 
-// Placeholder for TeacherRolePage, you can implement it as per your requirement
 class TeacherRolePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Take Attendance Manually'),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 27, 2, 85),
-              Color.fromARGB(244, 124, 3, 104),
-            ],
+        automaticallyImplyLeading: false, // Hide back arrow
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 248, 245, 248),
+                Color.fromRGBO(239, 240, 241, 1),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
         ),
+      ),
+      body: Container(
+        color: Colors.white, // Set scaffold background color to white
         child: Center(
           child: Text('Take Attendance Page'),
         ),
@@ -170,6 +177,18 @@ class CodePinPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Generate QR-code'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color.fromARGB(255, 241, 241, 241),
+                Color.fromARGB(255, 247, 249, 250),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
       ),
       body: Center(
         child: Text('Code Pin Generation Page'),
@@ -183,7 +202,19 @@ class CreateSessionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Session'),
+        automaticallyImplyLeading: false, // Hide back arrow
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color.fromARGB(255, 246, 245, 247),
+                const Color.fromARGB(255, 243, 244, 245),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
       ),
       body: Center(
         child: ElevatedButton(
@@ -191,13 +222,12 @@ class CreateSessionPage extends StatelessWidget {
             // Logic to create a session
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => OTPScreen()),
+              MaterialPageRoute(builder: (context) => BottomNavBarDemo1()),
             );
           },
-          child: Text('Create Session'),
+          child: Text('Generate chart'),
         ),
       ),
     );
   }
 }
-

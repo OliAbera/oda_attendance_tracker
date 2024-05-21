@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/piechart.dart';
-void main() {
-  runApp(MyApp());
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,29 +8,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BottomNavBarDemo(),
+      home: BottomNavBarDemo1(),
     );
   }
 }
 
-class BottomNavBarDemo extends StatefulWidget {
+class BottomNavBarDemo1 extends StatefulWidget {
   @override
-  _BottomNavBarDemoState createState() => _BottomNavBarDemoState();
+  _BottomNavBarDemo1State createState() => _BottomNavBarDemo1State();
 }
 
-class _BottomNavBarDemoState extends State<BottomNavBarDemo> {
+class _BottomNavBarDemo1State extends State<BottomNavBarDemo1> {
   int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Student',
+      'Pie Chart',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ),
     Text(
-      'Teacher',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ),
-    Text(
-      'Table',
+      'Graph',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ),
   ];
@@ -64,16 +56,12 @@ class _BottomNavBarDemoState extends State<BottomNavBarDemo> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Student',
+            icon: Icon(Icons.pie_chart),
+            label: 'Pie Chart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Teacher',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
-            label: 'Table',
+            icon: Icon(Icons.bar_chart),
+            label: 'Graph',
           ),
         ],
         currentIndex: _selectedIndex,

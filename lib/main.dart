@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:oda_attendace_tracker/Welcomescreen.dart';
+import 'package:oda_attendace_tracker/WelcomeScreen.dart';
+import 'package:oda_attendace_tracker/WelcomeScreenT.dart';
 import 'package:oda_attendace_tracker/WelcomescreenS.dart';
-import 'package:oda_attendace_tracker/WelcomescreenT.dart';
 
 void main() {
   runApp(MyApp());
@@ -106,7 +106,7 @@ class RoleSelectionPage extends StatelessWidget {
       width: buttonWidth,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey, // Gray color
+          color: Color.fromARGB(255, 219, 211, 211), // Gray color
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: ElevatedButton(

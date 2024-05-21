@@ -1,7 +1,9 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:oda_attendace_tracker/Enter.dart';
+import 'package:oda_attendace_tracker/menstruation.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,12 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: HomePage2(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage2 extends StatelessWidget {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index, BuildContext context) {
@@ -42,43 +44,55 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  void _showCalendarOptions(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Calendar Options"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: Icon(Icons.people),
-                title: Text("See Class Schedule"),
-                onTap: () {
-                  Navigator.pop(context);
-                  _showSectionSelectionDialog(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.event),
-                title: Text("See Special Events"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.menu_book),
-                title: Text("See Study Schedule"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+void _showCalendarOptions(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Calendar Options"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text("See Class Schedule"),
+              onTap: () {
+                Navigator.pop(context);
+                _showSectionSelectionDialog(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.event),
+              title: Text("See Special Events"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.accessibility_new),
+              title: Text("See Menstrual Cycle Schedule"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MenstrualCycleTracker()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.menu_book),
+              title: Text("See Study Schedule"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
 
   void _showSectionSelectionDialog(BuildContext context) {
     showDialog(
@@ -135,36 +149,6 @@ class HomePage extends StatelessWidget {
         ["4:15 - 5:00", "English", "Math", "Math", "English", "Physics"],
         ["5:00 - 5:45", "Math", "English", "Biology", "Biology", "English"],
         ["5:45 - 6:30", "Agri", "Chemistry", "---", "Physics", "---"],
-      ],
-      "Section B": [
-         ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        ["1:30 - 2:15", "English", "Chemistry", "Biology", "Chemistry", "English"],
-        ["2:15 - 3:00", "Physics", "English", "Agri", "English", "Math"],
-        ["3:00 - 3:45", "Math", "Biology", "Physics", "Biology", "Physics"],
-        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
-        ["4:15 - 5:00", "Agri", "Physics", "English", "Math", "Biology"],
-        ["5:00 - 5:45", "Chemistry", "Math", "Chemistry", "Physics", "Chemistry"],
-        ["5:45 - 6:30", "Biology", "---", "Math", "Agri", "---"],
-      ],
-      "Section C": [
-       ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        ["1:30 - 2:15", "Chemistry", "English", "Chemistry", "Biology", "Biology"],
-        ["2:15 - 3:00", "Agri", "Physics", "Math", "Physics", "Agri"],
-        ["3:00 - 3:45", "Physics", "Math", "Agri", "English", "Math"],
-        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
-        ["4:15 - 5:00", "Biology", "Chemistry", "Physics", "Chemistry", "English"],
-        ["5:00 - 5:45", "English", "Biology", "English", "Math", "Physics"],
-        ["5:45 - 6:30", "Math", "---", "Biology", "---", "Chemistry"],
-      ],
-      "Section D": [
-       ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        ["1:30 - 2:15", "Math", "Math", "English", "Math", "Physics"],
-        ["2:15 - 3:00", "English", "Chemistry", "Physics", "Biology", "English"],
-        ["3:00 - 3:45", "Biology", "English", "Biology", "Agri", "Chemistry"],
-        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
-        ["4:15 - 5:00", "Chemistry", "Biology", "Chemistry", "Physics", "Agri"],
-        ["5:00 - 5:45", "Agri", "Physics", "Math", "English", "Math"],
-        ["5:45 - 6:30", "Physics", "---", "---", "Chemistry", "Biology"],
       ],
     };
 

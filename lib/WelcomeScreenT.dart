@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oda_attendace_tracker/loginscreenT.dart';
+import 'package:oda_attendace_tracker/loginScreenT.dart';
 import 'package:oda_attendace_tracker/regscreenT.dart';
 import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
 
@@ -27,7 +27,7 @@ class WelcomeScreenT extends StatelessWidget {
                 height: 100,
               ),
               const Text(
-                'Welcome to Teacher\'s page',
+                'Welcome to teacher\'s page',
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
@@ -38,7 +38,7 @@ class WelcomeScreenT extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const loginScreenT()),
+                    MaterialPageRoute(builder: (context) => const LoginScreenT()),
                   );
                 },
                 child: Container(

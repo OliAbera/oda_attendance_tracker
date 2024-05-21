@@ -1,0 +1,205 @@
+PlayerCard(
+                  name: 'Abdi Mesfin Chufa',
+                  photoAsset: 'lib/images/Abdisa1.jpg',
+                  rollNumber: 1,
+                ),
+                PlayerCard(
+                  name: 'Abdulaziz Reshid A/Fita',
+                  photoAsset: 'assets/images/sterling.jpg',
+                  rollNumber: 2,
+                ),
+                PlayerCard(
+                  name: 'Abdulrashid Haji Sultan',
+                  photoAsset: 'lib/images/Abdure1.jpg',
+                  rollNumber: 3,
+                ),
+                PlayerCard(
+                  name: 'Abeba Sisay Zonta',
+                  photoAsset: 'assets/images/foden.jpg',
+                  rollNumber: 4,
+                ),
+                PlayerCard(
+                  name: 'Abenezer Befikadu Gemtessa',
+                  photoAsset: 'assets/images/ederson.jpg',
+                  rollNumber: 5,
+                ),
+                PlayerCard(
+                  name: 'Adil Befikadu Ararsa',
+                  photoAsset: 'assets/images/jesus.jpg',
+                  rollNumber: 6,
+                ),
+                PlayerCard(
+                  name: 'Aliyi Irbo Huseno',
+                  photoAsset: 'assets/images/laporte.jpg',
+                  rollNumber: 7,
+                ),
+                PlayerCard(
+                  name: 'Ansar Mohammed Jemal',
+                  photoAsset: 'assets/images/rodri.jpg',
+                  rollNumber: 8,
+                ),
+                PlayerCard(
+                  name: 'Dagmawi Teweldebrhan Kifle',
+                  photoAsset: 'lib/images/Biladind.jpg',
+                  rollNumber: 9,
+                ),
+                PlayerCard(
+                  name: 'Diriba Abdisa Shumi',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 10,
+                ),
+                PlayerCard(
+                  name: 'Dita Alemayehu Imishi',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 11,
+                ),
+                PlayerCard(
+                  name: 'Efrem Addisu Bajira',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 12,
+                ),
+                PlayerCard(
+                  name: 'Eyuel Mamo Abera',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 13,
+                ),
+                PlayerCard(
+                  name: 'Firaol Tsegaye Negash',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 14,
+                ),
+                PlayerCard(
+                  name: 'Fuad Mohammed Amin',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 15,
+                ),
+                PlayerCard(
+                  name: 'Habtamu Diriba Kebeb',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 16,
+                ),
+                PlayerCard(
+                  name: 'Hana Ingida Turuna',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 17,
+                ),
+                PlayerCard(
+                  name: 'Hayat Mohammed Siraj',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 18,
+                ),
+                PlayerCard(
+                  name: 'Hayu Megersa File ',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 19,
+                ),
+                PlayerCard(
+                  name: 'Henok Fikadu Tsegaye',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 20,
+                ),
+                PlayerCard(
+                  name: 'Hermela Adane Tumanso',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 21,
+                ),
+                PlayerCard(
+                  name: 'Ibsa Rameto Bedaso',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 22,
+                ),
+                PlayerCard(
+                  name: 'Jalene Mustefa Gosa',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 23,
+                ),
+                PlayerCard(
+                  name: 'Jitu Sida Megra',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 24,
+                ),
+                PlayerCard(
+                  name: 'Kalid Abajabal Ababoor',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 25,
+                ),
+                PlayerCard(
+                  name: 'Koricho Deyasa Mojo',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 26,
+                ),
+                PlayerCard(
+                  name: 'Mebrat Tashome Dema',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 27,
+                ),
+                PlayerCard(
+                  name: 'Merera Habtamu Bekele',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 28,
+                ),
+                PlayerCard(
+                  name: 'Meti Girma Regasa',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 29,
+                ),
+                PlayerCard(
+                  name: 'Murad Abdurahman Ahmed',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 30,
+                ),
+                PlayerCard(
+                  name: 'Negasa Beshada Mideksa',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 31,
+                ),
+                PlayerCard(
+                  name: 'Ofjan Bonsa Waktola',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 32,
+                ),
+                PlayerCard(
+                  name: 'Oli Silashi Jabessa ',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 33,
+                ),
+                PlayerCard(
+                  name: 'Radia Rida A/Raya',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 34,
+                ),
+                PlayerCard(
+                  name: 'Rekik Fekadu Sime ',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 35,
+                ),
+                PlayerCard(
+                  name: 'Selamawit Mekonnen ',
+                  photoAsset: 'lib/images/olik.jpg',
+                  rollNumber: 36,
+                ),
+                PlayerCard(
+                  name: 'Sena Fikadu Likisa',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 37,
+                ),
+                PlayerCard(
+                  name: 'Shelemo Dima Gishu',
+                  photoAsset: 'lib/images/robsi1.jpg',
+                  rollNumber: 38,
+                ),
+                PlayerCard(
+                  name: 'Taju Turi Shubo',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 39,
+                ),
+                PlayerCard(
+                  name: 'Wagane Diriba Seboka',
+                  photoAsset: 'assets/images/sifo.jpg',
+                  rollNumber: 40,
+                ),
+                PlayerCard(
+                  name: 'Wangari Kasu Mihratu',
+                  photoAsset: 'assets/images/torres.jpg',
+                  rollNumber: 41,
+                ),

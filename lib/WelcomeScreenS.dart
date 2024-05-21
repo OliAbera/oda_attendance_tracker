@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/loginscreenS.dart';
-import 'package:oda_attendace_tracker/regscreenS.dart';
+import 'package:oda_attendace_tracker/regScreenS.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import the url_launcher package
+
 class WelcomeScreenS extends StatelessWidget {
   const WelcomeScreenS({Key? key}) : super(key: key);
 
@@ -25,7 +27,7 @@ class WelcomeScreenS extends StatelessWidget {
                 height: 100,
               ),
               const Text(
-                'Welcome to Student\'s page',
+                'Welcome student\'s page',
                 style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
@@ -36,7 +38,7 @@ class WelcomeScreenS extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => loginScreenS()),
+                    MaterialPageRoute(builder: (context) => const LoginScreenS()),
                   );
                 },
                 child: Container(
@@ -63,7 +65,7 @@ class WelcomeScreenS extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RegScreenS()),
+                    MaterialPageRoute(builder: (context) => RegScreenS()),
                   );
                 },
                 child: Container(
@@ -87,19 +89,49 @@ class WelcomeScreenS extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              const Text(
-                'Login with:',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.white,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildSocialMediaIcon('lib/images/Google.png', 'https://accounts.google.com'),
+                  _buildSocialMediaIcon('lib/images/Facebook.png', 'https://www.facebook.com'),
+                  _buildSocialMediaIcon('lib/images/X.png', 'https://twitter.com'),
+                ],
               ),
-              SizedBox(height: 12,),
-              Image(image: AssetImage('lib/images/Google.png')),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildSocialMediaIcon(String imagePath, String url) {
+    return GestureDetector(
+      onTap: () {
+        _launchSocialMediaSignIn(url);
+      },
+      child: Column(
+        children: [
+          const Text(
+            'Login with:',
+            style: TextStyle(
+              fontSize: 17,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 12,),
+          Image(image: AssetImage(imagePath)),
+        ],
+      ),
+    );
+  }
+  // Method to launch social media sign-in page
+  void _launchSocialMediaSignIn(String url) async {
+    // ignore: deprecated_member_use
+    if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/AdminPage.dart';
-import 'package:oda_attendace_tracker/regScreen.dart';// Import Adminpage.dart
+import 'package:oda_attendace_tracker/regScreen.dart';
 
-class loginScreen extends StatelessWidget {
-  const loginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _isPasswordVisible = false;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill the email field with a frequently used email, if desired
+    _emailController.text = "frequent.email@example.com"; // Replace with actual email
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,51 +62,71 @@ class loginScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const TextField(
+                    TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.grey,
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.check, color: Colors.grey),
+                          onPressed: () {
+                            // Auto-fill functionality
+                            _emailController.text = "frequent.email@example.com";
+                          },
+                        ),
+                        label: const Text(
+                          'Gmail',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 171, 23, 184),
                           ),
-                          label: Text(
-                            'Gmail',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
-                            ),
-                          )),
-                    ),
-                    const TextField(
-                      decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.visibility_off,
-                            color: Colors.grey,
-                          ),
-                          label: Text(
-                            'Password',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xffB81736),
-                            ),
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                          color: Color(0xff281537),
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 70,
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: !_isPasswordVisible,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
+                        label: const Text(
+                          'Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 171, 23, 184),
+                          ),
+                        ),
+                      ),
                     ),
+                    const SizedBox(height: 20),
+                    GestureDetector(
+                      onTap: () {
+                        // Navigate to RegScreen.dart when "Forgot your password?" text button is pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => RegScreen()),
+                        );
+                      },
+                      child: const Align(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Color(0xff281537),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 70),
                     GestureDetector(
                       onTap: () {
                         // Navigate to Adminpage.dart when "SIGN IN" button is pressed
@@ -103,10 +139,10 @@ class loginScreen extends StatelessWidget {
                         height: 55,
                         width: 300,
                         decoration: BoxDecoration(
-                 borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(30),
                           gradient: const LinearGradient(colors: [
-                            Color(0xffB81736),
-                            Color(0xff281537),
+                            Color.fromARGB(255, 27, 2, 85),
+                            Color.fromARGB(244, 124, 3, 104),
                           ]),
                         ),
                         child: const Center(
@@ -120,9 +156,7 @@ class loginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 150,
-                    ),
+                    const SizedBox(height: 150),
                     Align(
                       alignment: Alignment.bottomRight,
                       child: Column(
@@ -164,4 +198,4 @@ class loginScreen extends StatelessWidget {
       ),
     );
   }
-}         
+}
