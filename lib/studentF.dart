@@ -1,9 +1,12 @@
 import 'dart:io';
-
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:oda_attendace_tracker/Enter.dart';
-import 'package:oda_attendace_tracker/menstruation.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:oda_attendace_tracker/Scan_QRcode.dart';
+import 'enter.dart';
+import 'menstruation.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,55 +47,40 @@ class HomePage2 extends StatelessWidget {
     }
   }
 
-void _showCalendarOptions(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Calendar Options"),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: Icon(Icons.people),
-              title: Text("See Class Schedule"),
-              onTap: () {
-                Navigator.pop(context);
-                _showSectionSelectionDialog(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.event),
-              title: Text("See Special Events"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.accessibility_new),
-              title: Text("See Menstrual Cycle Schedule"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MenstrualCycleTracker()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.menu_book),
-              title: Text("See Study Schedule"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
+  void _showCalendarOptions(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Calendar Options"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: Icon(Icons.people),
+                title: Text("See Class Schedule"),
+                onTap: () {
+                  Navigator.pop(context);
+                  _showSectionSelectionDialog(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.accessibility_new),
+                title: Text("See Menstrual Cycle Schedule"),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MenstruationApp()),
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   void _showSectionSelectionDialog(BuildContext context) {
     showDialog(
@@ -150,6 +138,36 @@ void _showCalendarOptions(BuildContext context) {
         ["5:00 - 5:45", "Math", "English", "Biology", "Biology", "English"],
         ["5:45 - 6:30", "Agri", "Chemistry", "---", "Physics", "---"],
       ],
+      "Section B": [
+        ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        ["1:30 - 2:15", "English", "Chemistry", "Biology", "Chemistry", "English"],
+        ["2:15 - 3:00", "Physics", "English", "Agri", "English", "Math"],
+        ["3:00 - 3:45", "Math", "Biology", "Physics", "Biology", "Physics"],
+        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
+        ["4:15 - 5:00", "Agri", "Physics", "English", "Math", "Biology"],
+        ["5:00 - 5:45", "Chemistry", "Math", "Chemistry", "Physics", "Chemistry"],
+        ["5:45 - 6:30", "Biology", "---", "Math", "Agri", "---"],
+      ],
+      "Section C": [
+        ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        ["1:30 - 2:15", "Chemistry", "English", "Chemistry", "Biology", "Biology"],
+        ["2:15 - 3:00", "Agri", "Physics", "Math", "Physics", "Agri"],
+        ["3:00 - 3:45", "Physics", "Math", "Agri", "English", "Math"],
+        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
+        ["4:15 - 5:00", "Biology", "Chemistry", "Physics", "Chemistry", "English"],
+        ["5:00 - 5:45", "English", "Biology", "English", "Math", "Physics"],
+        ["5:45 - 6:30", "Math", "---", "Biology", "---", "Chemistry"],
+      ],
+      "Section D": [
+        ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        ["1:30 - 2:15", "Math", "Math", "English", "Math", "Physics"],
+        ["2:15 - 3:00", "English", "Chemistry", "Physics", "Biology", "English"],
+        ["3:00 - 3:45", "Biology", "English", "Biology", "Agri", "Chemistry"],
+        ["3:45 - 4:15", "Break", "Break", "Break", "Break", "Break"],
+        ["4:15 - 5:00", "Chemistry", "Biology", "Chemistry", "Physics", "Agri"],
+        ["5:00 - 5:45", "Agri", "Physics", "Math", "English", "Math"],
+        ["5:45 - 6:30", "Physics", "---", "---", "Chemistry", "Biology"],
+      ],
     };
 
     showDialog(
@@ -177,65 +195,89 @@ void _showCalendarOptions(BuildContext context) {
     );
   }
 
+  void _showSettingsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("App Theme Settings"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text('Light'),
+                onTap: () {
+                  // Handle light theme selection
+                  // You can implement theme change logic here
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('Dark'),
+                onTap: () {
+                  // Handle dark theme selection
+                  // You can implement theme change logic here
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text('System'),
+                onTap: () {
+                  // Handle system theme selection
+                  // You can implement theme change logic here
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Student'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
+        title: Text('Home Page'),
         actions: [
           IconButton(
-            icon: Icon(Icons.location_history),
-            onPressed: () {},
+            icon: Icon(Icons.calendar_today),
+            onPressed: () {
+              _showCalendarOptions(context);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              _showSettingsDialog(context);
+            },
           ),
         ],
       ),
       body: Center(
-        child: Text('Home Page Content'),
+        child: Text('Select an option from the bottom navigation bar.'),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.dialpad),
+            icon: Icon(Icons.edit),
             label: 'Enter Code',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.scanner),
+            icon: Icon(Icons.qr_code_scanner),
             label: 'Scan QR Code',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Comment',
+            icon: Icon(Icons.comment),
+            label: 'Absence Comment',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-        onTap: (index) => _onItemTapped(index, context),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showCalendarOptions(context);
+        onTap: (index) {
+          _onItemTapped(index, context);
         },
-        child: Icon(Icons.calendar_today),
-      ),
-    );
-  }
-}
-
-
-
-class QRScanPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Scan QR Code'),
-      ),
-      body: Center(
-        child: Text('QR Scan Page'),
       ),
     );
   }
@@ -247,28 +289,41 @@ class AbsenceCommentPage extends StatefulWidget {
 }
 
 class _AbsenceCommentPageState extends State<AbsenceCommentPage> {
-  late TextEditingController _commentController;
-  File? _image;
+  TextEditingController _commentController = TextEditingController();
+  Uint8List? _imageBytes;
 
-  @override
-  void initState() {
-    super.initState();
-    _commentController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
+      if (kIsWeb) {
+        var bytes = await pickedFile.readAsBytes();
+        setState(() {
+          _imageBytes = bytes;
+        });
+      } else {
+        setState(() {
+          _imageBytes = File(pickedFile.path).readAsBytesSync();
+        });
+      }
+    }
+  }
+
+  Future<void> _sendToTelegram() async {
+    final comment = _commentController.text;
+    final telegramUrl = 'https://t.me/ODA_attendance/15';
+
+    String textToSend = 'Comment: $comment';
+    if (_imageBytes != null) {
+      textToSend += '\nImage attached';
+    }
+
+    final uri = Uri.parse('$telegramUrl?text=$textToSend');
+    if (await canLaunch(uri.toString())) {
+      await launch(uri.toString());
+    } else {
+      throw 'Could not launch $uri';
     }
   }
 
@@ -276,56 +331,43 @@ class _AbsenceCommentPageState extends State<AbsenceCommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Absent Comment'),
+        title: Text('Absence Comment'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Explain your absence:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
             TextField(
               controller: _commentController,
-              maxLines: 5,
               decoration: InputDecoration(
-                hintText: 'Type your comment here...',
-                border: OutlineInputBorder(),
+                labelText: 'Enter your comment',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
+              maxLines: 3,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _pickImage,
+              child: Text('Pick Image'),
+            ),
+            SizedBox(height: 20),
+            if (_imageBytes != null)
+              kIsWeb
+                  ? Image.memory(_imageBytes!)
+                  : Image.memory(_imageBytes!),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _sendToTelegram,
+              child: Text('Send'),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                textStyle: TextStyle(fontSize: 16),
               ),
             ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle send button pressed
-                  },
-                  child: Text('Send'),
-                ),
-                SizedBox(width: 20),
-                ElevatedButton.icon(
-                  onPressed: () => _pickImage(ImageSource.gallery),
-                  icon: Icon(Icons.photo),
-                  label: Text('Pick Image'),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton.icon(
-                  onPressed: () => _pickImage(ImageSource.camera),
-                  icon: Icon(Icons.camera),
-                  label: Text('Take Picture'),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    height: 200,
-                  )
-                : Container(),
           ],
         ),
       ),

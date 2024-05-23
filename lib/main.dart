@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/WelcomeScreen.dart';
 import 'package:oda_attendace_tracker/WelcomeScreenT.dart';
 import 'package:oda_attendace_tracker/WelcomescreenS.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/onboarding': (context) => OnboardingScreen(),
         '/roleSelection': (context) => RoleSelectionPage(),
         '/welcomeScreen': (context) => WelcomeScreen(),
-        '/teacherRole': (context) => TeacherRole(),
+        '/teacherRole': (context) => TeacherRole(),// Add this line
       },
     );
   }
@@ -153,6 +152,39 @@ class RoleSelectionPage extends StatelessWidget {
       ),
     );
   }
+
+  void _showChooseLanguageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Choose language'),
+          content: Text('Please choose your preferred language.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pushReplacementNamed(context, '/MedEng');
+              },
+              child: Text('English'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Implement action for other languages
+              },
+              child: Text('Other Language'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 class TeacherRole extends StatelessWidget {
@@ -216,7 +248,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       description:
           'Simplify attendance tracking for teachers and administrators.',
     ),
+     OnboardPage(
+      image: 'lib/images/done_icon.png',
+      title: 'Easy to Use',
+      description:
+          'Simplify attendance tracking for teachers and administrators.',
+    ),
+    
   ];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -294,7 +335,7 @@ class OnboardPage extends StatelessWidget {
         Expanded(
           child: Image.asset(
             image,
-            fit: BoxFit.cover, // Ensure the image covers the entire space
+            fit: BoxFit.cover,
           ),
         ),
         SizedBox(height: 30),

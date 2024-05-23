@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oda_attendace_tracker/AdminPage.dart';
+import 'package:oda_attendace_tracker/Teacher_option.dart';
 import 'package:oda_attendace_tracker/loginscreen.dart';
 
 class RegScreen extends StatefulWidget {
@@ -20,8 +21,33 @@ class _RegScreenState extends State<RegScreen> {
   @override
   void initState() {
     super.initState();
-    // Pre-fill the email field with a frequently used email, if desired
-    _emailController.text = "frequent.email@example.com"; // Replace with actual email
+    // Initialize controllers with empty strings if needed
+    _nameController.text = '';
+    _emailController.text = '';
+    _passwordController.text = '';
+    _confirmPasswordController.text = '';
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _signUp() {
+    if (_nameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _confirmPasswordController.text.isEmpty) {
+      _showSnackBar(context, 'Please fill all the information');
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      _showSnackBar(context, 'Passwords do not match');
+    } else {
+      // Navigate to TeacherOptionsPage when the button is pressed
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AdminScreen()),
+      );
+    }
   }
 
   @override
@@ -33,7 +59,8 @@ class _RegScreenState extends State<RegScreen> {
             height: double.infinity,
             width: double.infinity,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [ Color.fromARGB(255, 27, 2, 85),
+              gradient: LinearGradient(colors: [
+                Color.fromARGB(255, 27, 2, 85),
                 Color.fromARGB(244, 124, 3, 104),
               ]),
             ),
@@ -42,9 +69,10 @@ class _RegScreenState extends State<RegScreen> {
               child: Text(
                 'Create Your\nAccount',
                 style: TextStyle(
-                    fontSize: 30,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -97,7 +125,7 @@ class _RegScreenState extends State<RegScreen> {
                             ),
                             onPressed: () {
                               // Auto-fill functionality for email
-                              _emailController.text = "frequent.email@example.com";
+                              _emailController.text = "frequent.email@example.com"; // Replace with actual email
                             },
                           ),
                           label: Text(
@@ -157,25 +185,20 @@ class _RegScreenState extends State<RegScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      const SizedBox(height: 70),
+                      SizedBox(height: 10),
+                      SizedBox(height: 70),
                       GestureDetector(
-                        onTap: () {
-                          // Navigate to Adminpage.dart when the button is pressed
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AdminScreen()),
-                          );
-                        },
+                        onTap: _signUp,
                         child: Container(
                           height: 55,
                           width: 300,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
                             gradient: const LinearGradient(
-                                colors: [ Color.fromARGB(255, 27, 2, 85),
-                Color.fromARGB(244, 124, 3, 104),
-                                ]
+                              colors: [
+                                Color.fromARGB(255, 27, 2, 85),
+                                Color.fromARGB(244, 124, 3, 104),
+                              ],
                             ),
                           ),
                           child: const Center(
@@ -190,14 +213,14 @@ class _RegScreenState extends State<RegScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 80),
+                      SizedBox(height: 80),
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            const Text(
+                            Text(
                               "Already have an account?",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -213,7 +236,7 @@ class _RegScreenState extends State<RegScreen> {
                                   ),
                                 );
                               },
-                              child: const Text(
+                              child: Text(
                                 "Sign in",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,

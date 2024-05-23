@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oda_attendace_tracker/loginScreenT.dart';
+import 'package:oda_attendace_tracker/loginScreenS.dart';
+
 import 'package:oda_attendace_tracker/student.dart';
 
 class RegScreenS extends StatefulWidget {
@@ -260,7 +261,7 @@ class _RegScreenSState extends State<RegScreenS> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginScreenT(),
+                                    builder: (context) => LoginScreenS(),
                                   ),
                                 );
                               },

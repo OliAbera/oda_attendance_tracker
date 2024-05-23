@@ -1,133 +1,138 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
-  runApp(MenstrualCycleTracker());
+  runApp(MenstruationApp());
 }
 
-class MenstrualCycleTracker extends StatelessWidget {
+class MenstruationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Petra",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color(0xFFef7883),
-        canvasColor: Colors.transparent,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        backgroundColor: Color(0xFFfff5f3),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFFfff5f3),
-          elevation: 0,
-          iconTheme: IconThemeData(
-            color: Color(0xFFef7883),
-            size: 14.0,
-          ),
-          titleTextStyle: TextStyle(
-            color: Color(0xFFef7883),
-            fontSize: 16.0,
-          ),
-          centerTitle: true,
-        ),
-        textTheme: TextTheme(
-          bodyText2: TextStyle(
-            color: Color(0xFFef7883),
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.5,
-          ),
-          bodyText1: TextStyle(
-            color: Color(0xFF0D0C22).withOpacity(0.7),
-            fontSize: 16.0,
-            fontWeight: FontWeight.w500,
-            letterSpacing: 0.3,
-          ),
-          headline6: TextStyle(
-            color: Color(0xFF0D0C22),
-            fontWeight: FontWeight.bold,
-            fontSize: 15.0,
-            letterSpacing: 0.3,
-          ),
-          headline5: TextStyle(
-            color: Color(0xFFef7883),
-            fontWeight: FontWeight.bold,
-            fontSize: 22.0,
-            letterSpacing: 0.3,
-          ),
-          headline4: TextStyle(
-            color: Color(0xFF0D0C22),
-            fontWeight: FontWeight.w400,
-            fontSize: 16.0,
-            letterSpacing: 0.2,
-            height: 1.3,
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            elevation: MaterialStateProperty.resolveWith<double>(
-                (Set<MaterialState> states) {
-              return 10.0;
-            }),
-            shadowColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-              return Color(0xFFef7883).withOpacity(0.3);
-            }),
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.pressed))
-                  return Color(0xFFef7883).withOpacity(0.8);
-                return Color(0xFFef7883);
+      home: MenstruationScreen(),
+    );
+  }
+}
+
+class MenstruationScreen extends StatefulWidget {
+  @override
+  _MenstruationScreenState createState() => _MenstruationScreenState();
+}
+
+class _MenstruationScreenState extends State<MenstruationScreen> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _selectedDay = DateTime.now();
+  DateTime? _focusedDay = DateTime.now();
+
+  DateTime? _nextMenstruation;
+  DateTime? _ovulationDay;
+  DateTime? _lutealPhaseStart;
+  DateTime? _follicularPhaseStart;
+
+  @override
+  void initState() {
+    super.initState();
+    _calculatePredictions();
+  }
+
+  void _calculatePredictions() {
+    if (_selectedDay != null) {
+      _nextMenstruation = _selectedDay.add(Duration(days: 28));
+      _ovulationDay = _selectedDay.add(Duration(days: 14));
+      _lutealPhaseStart = _selectedDay;
+      _follicularPhaseStart = _ovulationDay;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Menstruation Tracker'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TableCalendar(
+              calendarFormat: _calendarFormat,
+              focusedDay: _focusedDay!,
+              firstDay: DateTime.utc(2020, 1, 1),
+              lastDay: DateTime.utc(2030, 12, 31),
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                  _calculatePredictions();
+                });
               },
             ),
-            foregroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                return Color(0xFFfff5f3);
-              },
+            SizedBox(height: 20),
+            Text(
+              'Menstruation Predictions:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-              (Set<MaterialState> states) {
-                return TextStyle(
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 0.5,
-                );
-              },
+            _buildPredictionTile('Next Menstruation', _nextMenstruation),
+            _buildPredictionTile('Ovulation Day', _ovulationDay),
+            _buildPredictionTile('Luteal Phase', _lutealPhaseStart, _ovulationDay),
+            _buildPredictionTile('Follicular Phase', _ovulationDay, _nextMenstruation),
+            SizedBox(height: 20),
+            Text(
+              'Lifestyle Advice:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            minimumSize: MaterialStateProperty.resolveWith<Size>(
-              (Set<MaterialState> states) {
-                return Size(160.0, 36.0);
-              },
+            _buildAdviceTile('Luteal Phase', _lutealPhaseAdvice),
+            _buildAdviceTile('Follicular Phase', _follicularPhaseAdvice),
+            SizedBox(height: 20),
+            Text(
+              'Symptoms Advice:',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-          ),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                return Color(0xFFef7883);
-              },
-            ),
-            textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-              (Set<MaterialState> states) {
-                return TextStyle(
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 0.5,
-                );
-              },
-            ),
-            side: MaterialStateProperty.resolveWith<BorderSide>(
-              (Set<MaterialState> states) {
-                return BorderSide(
-                  color: Color(0xFFef7883),
-                );
-              },
-            ),
-            minimumSize: MaterialStateProperty.resolveWith<Size>(
-              (Set<MaterialState> states) {
-                return Size(160.0, 36.0);
-              },
-            ),
-          ),
+            _buildAdviceTile('General Symptoms', _generalSymptomsAdvice),
+          ],
         ),
       ),
     );
   }
+
+  Widget _buildPredictionTile(String title, DateTime? date, [DateTime? endDate]) {
+    String dateString = date != null ? date.toLocal().toString().split(' ')[0] : 'N/A';
+    String endDateString = endDate != null ? endDate.toLocal().toString().split(' ')[0] : 'N/A';
+    return ListTile(
+      title: Text(title),
+      subtitle: Text(endDate != null ? '$dateString to $endDateString' : dateString),
+    );
+  }
+
+  Widget _buildAdviceTile(String title, List<String> advice) {
+    return ExpansionTile(
+      title: Text(title),
+      children: advice.map((adviceText) => ListTile(title: Text(adviceText))).toList(),
+    );
+  }
+
+  List<String> get _lutealPhaseAdvice => [
+        'Eat foods rich in magnesium and calcium like nuts and leafy greens.',
+        'Stay hydrated to help manage bloating.',
+        'Engage in light exercise to boost mood.',
+        'Prioritize sleep to combat fatigue.',
+      ];
+
+  List<String> get _follicularPhaseAdvice => [
+        'Consume iron-rich foods to replenish blood loss.',
+        'Include healthy fats in your diet for hormonal balance.',
+        'Maintain regular exercise to support overall health.',
+        'Focus on stress management techniques like meditation.',
+      ];
+
+  List<String> get _generalSymptomsAdvice => [
+        'Track your symptoms to identify patterns.',
+        'Consult with a healthcare provider for personalized advice.',
+        'Consider using pain relief methods such as heating pads or over-the-counter medication.',
+        'Maintain a balanced diet to support overall health.',
+      ];
 }

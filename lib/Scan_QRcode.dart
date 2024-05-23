@@ -24,8 +24,9 @@ class QRScanPage extends StatefulWidget {
 }
 
 class _QRScanPageState extends State<QRScanPage> {
-  late QRViewController controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
+  Barcode? result;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +41,21 @@ class _QRScanPageState extends State<QRScanPage> {
             child: QRView(
               key: qrKey,
               onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: Colors.red,
+                borderRadius: 10,
+                borderLength: 30,
+                borderWidth: 10,
+                cutOutSize: 300,
+              ),
             ),
           ),
           Expanded(
             flex: 1,
             child: Center(
-              child: Text('Scan QR code to record attendance'),
+              child: (result != null)
+                  ? Text('Scanned QR Code: ${result!.code}')
+                  : Text('Scan a QR code to record attendance'),
             ),
           ),
         ],
@@ -54,8 +64,13 @@ class _QRScanPageState extends State<QRScanPage> {
   }
 
   void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
+    setState(() {
+      this.controller = controller;
+    });
     controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        result = scanData;
+      });
       // Process the scanned QR code data here
       String? qrData = scanData.code;
       // For now, just print the scanned QR code data
@@ -66,7 +81,16 @@ class _QRScanPageState extends State<QRScanPage> {
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    if (controller != null) {
+      controller!.pauseCamera();
+    }
+    controller?.resumeCamera();
   }
 }

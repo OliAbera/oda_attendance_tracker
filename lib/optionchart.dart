@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oda_attendace_tracker/Graph.dart';
 import 'package:oda_attendace_tracker/piechart.dart';
 class MyApp extends StatelessWidget {
   @override
@@ -39,6 +40,12 @@ class _BottomNavBarDemo1State extends State<BottomNavBarDemo1> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => PieChartPage()),
+        );
+      }else if (_selectedIndex == 1) {
+        // Navigate to PointColorMapper page when "Student" is pressed
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  ChartGeneratorPage()),
         );
       }
     });

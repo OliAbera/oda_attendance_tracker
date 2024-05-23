@@ -19,11 +19,8 @@ class _LoginScreenSState extends State<LoginScreenS> {
   @override
   void initState() {
     super.initState();
-    // Pre-fill the email field with a frequently used email, if desired
-    _emailController.text = "frequent.email@example.com"; // Replace with actual email
+    _emailController.text = "frequent.email@example.com";
   }
-
-  // Function to check if all required fields are filled
   bool _areAllFieldsFilled() {
     return _emailController.text.isNotEmpty &&
         _passwordController.text.isNotEmpty &&
@@ -66,7 +63,7 @@ class _LoginScreenSState extends State<LoginScreenS> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 18.0, right: 18, bottom: 40), // Added bottom padding to prevent overflow
+                  padding: const EdgeInsets.only(left: 18.0, right: 18, bottom: 40),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

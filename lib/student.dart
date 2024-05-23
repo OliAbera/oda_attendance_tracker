@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:oda_attendace_tracker/Enter.dart';
+import 'package:oda_attendace_tracker/Scan_QRcode.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,20 +58,6 @@ class HomePage extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context);
                   _showSectionSelectionDialog(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.event),
-                title: Text("See Special Events"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.menu_book),
-                title: Text("See Study Schedule"),
-                onTap: () {
-                  Navigator.pop(context);
                 },
               ),
             ],
@@ -240,23 +227,6 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-
-class QRScanPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Scan QR Code'),
-      ),
-      body: Center(
-        child: Text('QR Scan Page'),
-      ),
-    );
-  }
-}
-
 class AbsenceCommentPage extends StatefulWidget {
   @override
   _AbsenceCommentPageState createState() => _AbsenceCommentPageState();

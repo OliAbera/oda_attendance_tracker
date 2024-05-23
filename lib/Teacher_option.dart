@@ -3,8 +3,7 @@ import 'package:oda_attendace_tracker/GeneratePinCode.dart';
 import 'package:oda_attendace_tracker/barcode.dart';
 import 'package:oda_attendace_tracker/optionchart.dart';
 
-import 'package:oda_attendace_tracker/options2.dart';
-import 'package:oda_attendace_tracker/piechart.dart'; // Import Option2.dart
+import 'package:oda_attendace_tracker/options2.dart';// Import Option2.dart
 
 void main() {
   runApp(MaterialApp(
@@ -41,7 +40,7 @@ class _TeacherOptionsPageState extends State<TeacherOptionsPage> {
       // Navigate to OTPScreen when "Give a Session" is selected
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PieChartPage()),
+        MaterialPageRoute(builder: (context) => BottomNavBarDemo1()),
       );
     }
   }

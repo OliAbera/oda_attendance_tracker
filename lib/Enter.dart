@@ -201,16 +201,8 @@ class _ValidateLocationPageState extends State<ValidateLocationPage> {
                   children: [
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () => _sendApprovalMessage('Gmail'),
-                      child: Text('Send via Gmail'),
-                    ),
-                    ElevatedButton(
                       onPressed: () => _sendApprovalMessage('Telegram'),
-                      child: Text('Send via Telegram'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => _sendApprovalMessage('Instagram'),
-                      child: Text('Send via Instagram'),
+                      child: Text('Approve'),
                     ),
                   ],
                 ),

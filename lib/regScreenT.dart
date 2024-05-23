@@ -27,6 +27,28 @@ class _RegScreenTState extends State<RegScreenT> {
     _confirmPasswordController.text = '';
   }
 
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _signUp() {
+    if (_nameController.text.isEmpty ||
+        _emailController.text.isEmpty ||
+        _passwordController.text.isEmpty ||
+        _confirmPasswordController.text.isEmpty) {
+      _showSnackBar(context, 'Please fill all the information');
+    } else if (_passwordController.text != _confirmPasswordController.text) {
+      _showSnackBar(context, 'Passwords do not match');
+    } else {
+      // Navigate to TeacherOptionsPage when the button is pressed
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TeacherOptionsPage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +59,7 @@ class _RegScreenTState extends State<RegScreenT> {
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(colors: [
-                 Color.fromARGB(255, 27, 2, 85),
+                Color.fromARGB(255, 27, 2, 85),
                 Color.fromARGB(244, 124, 3, 104),
               ]),
             ),
@@ -165,13 +187,7 @@ class _RegScreenTState extends State<RegScreenT> {
                       SizedBox(height: 10),
                       SizedBox(height: 70),
                       GestureDetector(
-                        onTap: () {
-                          // Navigate to TeacherOptionsPage when the button is pressed
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TeacherOptionsPage()),
-                          );
-                        },
+                        onTap: _signUp,
                         child: Container(
                           height: 55,
                           width: 300,

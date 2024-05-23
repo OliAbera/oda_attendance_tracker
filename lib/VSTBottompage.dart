@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oda_attendace_tracker/piechart.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -33,23 +34,28 @@ class _BottomNavBarDemoState extends State<BottomNavBarDemo> {
       'Teacher',
       style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
     ),
-    Text(
-      'Table',
-      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-    ),
   ];
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == 0) {
-        // Navigate to PointColorMapper page when "Student" is pressed
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PieChartPage()),
-        );
-      }
     });
+
+    if (_selectedIndex == 0) {
+      const url = 'https://t.me/ODA_attendance/26';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } else if (_selectedIndex == 1) {
+      const url = 'https://t.me/ODA_attendance/17';
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw 'Could not launch $url';
+      }
+    }
   }
 
   @override
@@ -65,15 +71,11 @@ class _BottomNavBarDemoState extends State<BottomNavBarDemo> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            label: 'Student',
+            label: 'Pie',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Teacher',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_chart),
-            label: 'Table',
+            label: 'Graph',
           ),
         ],
         currentIndex: _selectedIndex,

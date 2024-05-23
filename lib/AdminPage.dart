@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oda_attendace_tracker/Add_student.dart';
 import 'package:oda_attendace_tracker/Add_teacher.dart';
 import 'package:oda_attendace_tracker/VSTBottompage.dart';
 void main() {
@@ -77,7 +78,7 @@ class AdminScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddStudentPage()),
+                      MaterialPageRoute(builder: (context) => AddTeacher2Page()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -114,31 +115,15 @@ class AdminScreen extends StatelessWidget {
                 ),
               ),
               icon: Icon(
-                Icons.view_list,
+                Icons.bar_chart_outlined,
                 color: Colors.white,
               ),
               label: Text(
-                'View Student or Teacher',
+                'Analysis',
                 style: TextStyle(color: Colors.white),
               ),
             ),
             SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: () {
-                // Log Out functionality
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: Text(
-                'Log Out',
-                style: TextStyle(color: Colors.yellow),
-              ),
-            ),
           ],
         ),
       ),
